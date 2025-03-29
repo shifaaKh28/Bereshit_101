@@ -118,54 +118,67 @@ public class Bereshit_101 {
 
 		// ---------------------- Getters & Setters ----------------------
 		public double getVs() { return vs; }
-		public void setVs(double vs) { this.vs = vs; }
 
 		public double getHs() { return hs; }
-		public void setHs(double hs) { this.hs = hs; }
 
 		public double getAng() { return ang; }
-		public void setAng(double ang) { this.ang = ang; }
+
 
 		public double getFuel() { return fuel; }
-		public void setFuel(double fuel) { this.fuel = fuel; }
+
 
 		public double getNN() { return NN; }
-		public void setNN(double NN) { this.NN = NN; }
 
-		public double getDist() { return dist; }
 		public double getAlt() { return alt; }
-		public double getTime() { return time; }
+
 		public double getDt() { return dt; }
 		public double getAcc() { return acc; }
-		public double getWeight() { return weight; }
+
 	}
-	public static double getDesiredHs(double alt) {
-		double minAlt = 2000.0;
-		double maxAlt = 30000.0;
-		if (alt < minAlt) {
+	// Calculates the desired horizontal speed based on current altitude
+	public static double getTargetHorizontalSpeed(double currentAltitude) {
+		final double MIN_ALTITUDE = 2000.0;
+		final double MAX_ALTITUDE = 30000.0;
+		final double MAX_HORIZONTAL_SPEED = 1700.0;
+
+		if (currentAltitude < MIN_ALTITUDE) {
 			return 0.0;
-		} else if (alt > maxAlt) {
-			return 1700.0;
+		} else if (currentAltitude > MAX_ALTITUDE) {
+			return MAX_HORIZONTAL_SPEED;
 		} else {
-			double norm = (alt - minAlt) / (maxAlt - minAlt);
-			return norm * 1700.0;
+			double normalizedAlt = (currentAltitude - MIN_ALTITUDE) / (MAX_ALTITUDE - MIN_ALTITUDE);
+			return normalizedAlt * MAX_HORIZONTAL_SPEED;
 		}
 	}
 
-	public static double getDesiredVs(double alt) {
-		if (alt > 8000.0) return 30.0;
-		else if (alt > 500.0) return 24.0;
-		else if (alt > 300.0) return 12.0;
-		else if (alt > 100.0) return 6.0;
-		else if (alt > 50.0) return 3.0;
-		else return (alt > 25.0 ? 2.0 : 1.0);
+	// Calculates the desired vertical speed based on current altitude
+	public static double getTargetVerticalSpeed(double currentAltitude) {
+		if (currentAltitude > 8000.0) {
+			return 30.0;
+		} else if (currentAltitude > 500.0) {
+			return 24.0;
+		} else if (currentAltitude > 300.0) {
+			return 12.0;
+		} else if (currentAltitude > 100.0) {
+			return 6.0;
+		} else if (currentAltitude > 50.0) {
+			return 3.0;
+		} else {
+			return (currentAltitude > 25.0 ? 2.0 : 1.0);
+		}
 	}
 
-	public static double getDesiredAngle(double alt) {
-		if (alt > 1500.0) return 60.0;
-		else if (alt > 1200.0) return 50.0;
-		else if (alt > 1000.0) return 30.0;
-		else return 0.0;
+	// Calculates the desired angle based on current altitude
+	public static double getTargetAngle(double currentAltitude) {
+		if (currentAltitude > 1500.0) {
+			return 60.0;
+		} else if (currentAltitude > 1200.0) {
+			return 50.0;
+		} else if (currentAltitude > 1000.0) {
+			return 30.0;
+		} else {
+			return 0.0;
+		}
 	}
 
 }
