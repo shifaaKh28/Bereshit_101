@@ -46,11 +46,6 @@ public class Main {
 
         System.out.printf("Landing ended: alt=%.2f, vs=%.2f, hs=%.2f, fuel=%.2f\n",
                 lander.getAlt(), lander.getVs(), lander.getHs(), lander.getFuel());
-
-        if (lander.getVs() >= -2.5 && lander.getHs() <= 2.5 && lander.getFuel() >= 50) {
-            System.out.println("Landing successful! 🚀");
-        } else {
-            System.out.println("Crashed! 💥");
-        }
+        
     }
 }
